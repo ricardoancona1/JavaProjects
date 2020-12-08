@@ -13,16 +13,23 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
     }
 
-    private final String[] colonias = new String[] { "", "Centro", "Yucatán", "Garcia Ginerés", "Itzimná", "SanLuis", "México",
-            "Chuburna de Hidalgo", "Linda Vista", "Pensiones", "Tanlum", "Campestre", "Esperanza", "Chuminópolis",
-            "Las Palmas", "Lazaro Cardenas", "San José", "Cortes Sarmiento", "Azcorra", "Lourdes", "Mira Flores",
-            "Mira Flores II", "Azcorra", "San Jose Vergel", "Vergel II" };
+    private final BusquedaAvara busquedaAvara = new BusquedaAvara();
 
     private String colonia1 = "";
-    private String colonia2 = "";
 
+    private int getPosString(String[] colonias) {
+        int pos = 0;
+        for (int k = 0; k < colonias.length; k += 1) {
+            if (colonias[k].equals(colonia1)) {
+                pos = k;
+                break;
+            }
+        }
+        return pos;
+    }
     @SuppressWarnings("unchecked")
     private void initComponents() {
+        String[] colonias = busquedaAvara.getColoniasNombres();
         JPanel jPanel1 = new JPanel();
         JLabel jLabel3 = new JLabel();
         JLabel jLabel4 = new JLabel();
@@ -34,8 +41,9 @@ public class Interfaz extends javax.swing.JFrame {
         JTextArea rutaCostoTextArea = new JTextArea();
         JLabel jLabel5 = new JLabel();
         JButton calcularBtn = new JButton();
-        calcularBtn.addActionListener(x -> { if(!colonia1.equals("") && !colonia2.equals(""))
-            JOptionPane.showMessageDialog(null, colonia1 + " " + colonia2); });
+        calcularBtn.addActionListener(x -> {
+            rutaCostoTextArea.setText("");
+            rutaCostoTextArea.setText(colonia1 + "->" + busquedaAvara.calcularDistancia(getPosString(colonias), 2)); });
         JLabel jLabel6 = new JLabel();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(2, 198, 222));
@@ -45,10 +53,10 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel3.setText("RUTAS MÁS CORTAS EL LA CIUDAD DE MÉRIDA");
         jLabel3.setName(""); // NOI18N
         jLabel4.setText("Seleccione punto de partida y destino:");
-        comboDestino.setModel(new DefaultComboBoxModel(colonias));
-        comboDestino.addItemListener(e -> colonia1 = e.getItem().toString());
+        comboDestino.addItem("Centro");
+        comboDestino.setEnabled(false);
         comboPartida.setModel(new DefaultComboBoxModel(colonias));
-        comboPartida.addItemListener(e -> colonia2 = e.getItem().toString());
+        comboPartida.addItemListener(e -> colonia1 = e.getItem().toString());
         jLabel2.setText("A");
         jLabel1.setText("De");
         rutaCostoTextArea.setColumns(20);
@@ -56,7 +64,7 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPane1.setViewportView(rutaCostoTextArea);
         jLabel5.setText("Ruta y costo:");
         calcularBtn.setText("Calcular");
-        jLabel6.setIcon(new javax.swing.ImageIcon("src/algoritmosia/assets/MAPA")); // NOI18N
+        jLabel6.setIcon(Imagen.getImage()); // NOI18N
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

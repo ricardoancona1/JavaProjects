@@ -42,6 +42,7 @@ public class Interfaz extends javax.swing.JFrame {
         JLabel jLabel5 = new JLabel();
         JButton calcularBtn = new JButton();
         calcularBtn.addActionListener(x -> {
+            busquedaAvara.distanciaCumulada = 0.0f;
             rutaCostoTextArea.setText("");
             rutaCostoTextArea.setText(colonia1 + "->" + busquedaAvara.calcularDistancia(getPosString(colonias), 2) + " "
                     + "\nDistancia = " + busquedaAvara.getDistanciaCumulada(getPosString(colonias)) + "Km"); });

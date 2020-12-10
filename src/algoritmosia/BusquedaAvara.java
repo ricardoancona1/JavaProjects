@@ -72,14 +72,17 @@ public class BusquedaAvara {
         return colonias;
     }
 
+    public float distanciaCumulada = 0.0f;
+
+    public float getDistanciaCumulada(int inicio) {
+        return distanciaCumulada + colonias.get(inicio).getDistancia();
+    }
+
     public String calcularDistancia(int inicio, int fin) {
-        System.out.println(inicio);
         Colonia colonia = buscarMenor(arbol.get(inicio));
-        if (fin == colonia.getId() || inicio == fin)
-            return colonias.get(fin).getNombre() + " ";
-        else {
-            return colonia.getNombre() + " -> " +calcularDistancia(colonia.getId(), fin);
-        }
+        distanciaCumulada += colonia.getDistancia();
+        if (fin == colonia.getId() || inicio == fin) return colonias.get(fin).getNombre() + " ";
+        else return colonia.getNombre() + " -> " + calcularDistancia(colonia.getId(), fin);
     }
 
     private Colonia buscarMenor(int[] nodos) {

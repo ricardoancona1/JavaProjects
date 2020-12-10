@@ -43,7 +43,8 @@ public class Interfaz extends javax.swing.JFrame {
         JButton calcularBtn = new JButton();
         calcularBtn.addActionListener(x -> {
             rutaCostoTextArea.setText("");
-            rutaCostoTextArea.setText(colonia1 + "->" + busquedaAvara.calcularDistancia(getPosString(colonias), 2)); });
+            rutaCostoTextArea.setText(colonia1 + "->" + busquedaAvara.calcularDistancia(getPosString(colonias), 2) + " "
+                    + "\nDistancia = " + busquedaAvara.getDistanciaCumulada(getPosString(colonias)) + "Km"); });
         JLabel jLabel6 = new JLabel();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(2, 198, 222));
